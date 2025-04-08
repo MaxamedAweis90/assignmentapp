@@ -1,0 +1,14 @@
+workflows:
+  ios:
+    name: iOS Workflow
+    platform: ios
+    build:
+      scripts:
+        - name: Install dependencies
+          script: flutter pub get
+        - name: Build the app
+          script: flutter build ios --release
+    publish:
+      scripts:
+        - name: Upload to TestFlight
+          script: fastlane beta
