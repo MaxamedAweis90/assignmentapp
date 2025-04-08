@@ -1,21 +1,10 @@
 workflows:
   ios:
     name: iOS Workflow
-    # Specify the platform as flutter (CodeMagic handles Flutter-based apps)
-    platform: flutter
-    flutter:
-      version: stable # You can specify a version if needed
-
-    # Add the build step
-    build:
-      # The default build command for Flutter iOS is `flutter build ios`
-      # Use the --release flag to build the release version
-      commands:
-        - flutter pub get
-        - flutter build ios --release
-
-    # Optional: Add publishing commands (e.g., deploy to TestFlight)
-    # If you're using Fastlane, you can run a Fastlane command here
-    publish:
-      commands:
-        - fastlane beta
+    ios:
+      flutter: stable
+      build:
+        ios:
+          release: true
+      publish:
+        testflight: true
