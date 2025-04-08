@@ -1,10 +1,9 @@
 workflows:
   ios:
     name: iOS Workflow
-    ios:
-      flutter: stable
-      build:
-        ios:
-          release: true
-      publish:
-        testflight: true
+    flutter: stable
+    build:
+      ios:
+        release: true
+    publish:
+      testflight: true
