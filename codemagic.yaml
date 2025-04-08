@@ -1,9 +1,10 @@
 workflows:
   ios:
     name: iOS Workflow
-    flutter: stable
+    # Define the build for iOS
     build:
       ios:
         release: true
+    # Define the publish steps
     publish:
       testflight: true
