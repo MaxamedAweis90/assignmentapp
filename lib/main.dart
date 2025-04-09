@@ -43,8 +43,8 @@
 //   }
 // }
 
+import 'package:assignmentapp/pages/Start.dart';
 import 'package:flutter/material.dart';
-import 'package:assignmentapp/pages/landing_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Assignments',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: LandingPage(),
+      home: Startpage(),
     );
   }
 }

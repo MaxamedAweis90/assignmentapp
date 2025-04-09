@@ -1,73 +1,105 @@
 import 'package:flutter/material.dart';
-import 'question3.dart'; // Ensure this path matches your actual file structure
+import 'calculator_gui.dart';
+import 'cgpa_calculator_gui.dart';
+import 'question3.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
+
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  int _currentIndex = 0;
+
+  // List of pages for each tab
+  final List<Widget> _pages = [
+    WelcomePage(),
+    CalculatorGUI(),
+    CGPACalculator(),
+    Question3Page(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(
-              'https://th.bing.com/th/id/R.2a5fd36dbc1724922bb2206b35a4dcda?rik=ukSa06cIVmJ9zQ&pid=ImgRaw&r=0',
-            ), // Replace with your image URL
-            fit: BoxFit.cover,
+      body: _pages[_currentIndex], // Display the current page
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex, // Track the selected tab
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index; // Update the selected tab
+          });
+        },
+        backgroundColor: const Color.fromARGB(
+          255,
+          79,
+          58,
+          115,
+        ), // Explicit background color
+        selectedItemColor: Colors.white, // Highlight the selected tab
+        unselectedItemColor: Colors.grey, // Dull color for unselected tabs
+        type: BottomNavigationBarType.fixed, // Ensures colors apply correctly
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calculate),
+            label: 'Calculator',
           ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Spacer(),
-              Container(
-                color: Colors.black.withOpacity(0.8),
-                padding: EdgeInsets.all(30),
-                child: Column(
-                  children: [
-                    Text(
-                      'Aweis Audio Player',
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 50),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Question3Page(),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(
-                          255,
-                          246,
-                          243,
-                          243,
-                        ),
-                        foregroundColor: const Color.fromARGB(255, 68, 96, 255),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 20,
-                        ),
-                        textStyle: TextStyle(fontSize: 20),
-                      ),
-                      child: Text('Launch App'),
-                    ),
-                  ],
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'CGPA Calculator',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.audiotrack),
+            label: 'Audio Player',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class WelcomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Home')),
+      body: Center(
+        child: RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            text: 'Welcome to the App!\n\n',
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            children: <TextSpan>[
+              const TextSpan(
+                text:
+                    'This is the First Mobile App Development Assignment Submission by ',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey,
                 ),
               ),
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 50.0),
-                child: Text(
-                  'Developed by Aweis',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+              TextSpan(
+                text: 'EngAweis',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+              const TextSpan(
+                text: '.',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.grey,
                 ),
               ),
             ],
